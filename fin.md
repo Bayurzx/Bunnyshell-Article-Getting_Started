@@ -6,7 +6,7 @@ Introduction to Bunnyshell
 Bunnyshell is an Environment as a Service (EaaS) platform that simplifies the creation and management of full-stack environments for development, staging, and production. It provides developers with fully managed and pre-configured development environments, enabling them to focus on building great products. Let's explore the core features and benefits of Bunnyshell that set it apart from other similar platforms.
 
 Summary:
-> It's basically provides containers (environments for your work). i.e your frontend, DB, and backend can be in the container or different containers for your desired use case
+> It basically provides containers (environments for your work), where your frontend, DB, and backend can be in the same container or different containers based on your desired use case.
 
 ### Core Features and Functionalities of Bunnyshell EaaS Platform
 
@@ -14,18 +14,17 @@ Summary:
 -   Unified Platform: With Bunnyshell, you can perform all stages of your development in one platform. Say goodbye to complex setups and enjoy the convenience of managing your testing, development, and staging environments in minutes.
 -   Collaboration Made Easy: Bunnyshell allows multiple participants to clone environments and experiment with ideas and features independently, eliminating the stress of pull requests and breaking changes.
 -   Accelerated Deployment: Bunnyshell enables businesses to deploy all-in-one application environments systematically and rapidly, enhancing productivity and time-to-market.
-
--   Reproduction and Testing: Easily reproduce and test your current solution or explore different use cases in seconds,
--   Cost Management: Bunnyshell helps you optimize costs by efficiently managing your environments and resources,
-
+-   Reproduction and Testing: Easily reproduce and test your current solution or explore different use cases in seconds.
+-   Cost Management: Bunnyshell helps you optimize costs by efficiently managing your environments and resources.
 
 Tutorial: Setting Up Full-Stack Environments with Bunnyshell
 ------------------------------------------------------------
 
 In this tutorial, we will cover two segments: the first segment will demonstrate using Docker to start a full-stack environment, and the second segment will focus on using Terraform.
+
 ### Pre-tutorial
 
-Before we start let talk about environments in bunnyshell
+Before we start, let's talk about environments in Bunnyshell:
 - When working with with environment variables, you can create either a project, environment, or component variable. 
 
 ---
@@ -41,19 +40,21 @@ Setup Component Variables
 ![Comp_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/comp_var_.jpg)
 
 
-- When you define your environment variables in your yaml file, they will most likely appear in the the component variables or environment variables depending on what section.
-- You should define your secrets from the UI and click on the secret well because it's a secret and it shouldn't be exposed in the yaml file
+- When you define your environment variables in your YAML file, they will most likely appear in the component variables or environment variables section, depending on the context.
+- You should define your secrets from the UI and click on the secret well because it's a secret and it shouldn't be exposed in the YAML file.
+
+
 ---
 ![secrets](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/secrets.jpg)
 
-> Note: The hierarchy at which bunnyshell will select the variable is component 1st, environment 2nd, project variable. Incase you have different values with the same key.
+> Note: The hierarchy that Bunnyshell will follow to select the variable is component first, environment second, and project variable last. In case you have different values with the same key.
 
 
 
 ### Segment 1: Using Docker-Compose to Set Up Full-Stack Environment
 
 1.  Setup your full-stack environment with a Dockerfile and a docker-compose file in your project directory.
-    - To set up a full-stack environment using Docker, You need to have a docker-compose.yaml file in your GitHub directory. Bunnyshell platform will search your repo and instinctively use the files it needs to create your desired environment. 
+    - To set up a full-stack environment using Docker, you need to have a docker-compose.yaml file in your GitHub directory. Bunnyshell platform will search your repo and automatically use the files it needs to create your desired environment.
 Here's an example docker-compose file for a development environment:
 <br>
 <br>

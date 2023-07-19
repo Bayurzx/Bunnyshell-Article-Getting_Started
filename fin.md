@@ -11,11 +11,12 @@ Summary:
 ### Core Features and Functionalities of Bunnyshell EaaS Platform
 
 -   EaaS Model: Bunnyshell follows the Environment as a Service model, where developers can access fully managed and pre-configured environments. EaaS expands on the conventional IaaS paradigm for application development.
--   Streamlined Development: Bunnyshell allows you to perform all stages of your development in one platform. You can deploy your testing, development, and staging environments in minutes.
--   Allows several participants/users to clone environments and experiment with ideas and features independently without the stress of pull requests and breaking changes
--   Enables businesses to deploy an all-in-one application environment systematically and fast
--   Reproduce and test current solution, issues for a different use case in seconds.
--   Cost Management 
+-   Unified Platform: With Bunnyshell, you can perform all stages of your development in one platform. Say goodbye to complex setups and enjoy the convenience of managing your testing, development, and staging environments in minutes.
+-   Collaboration Made Easy: Bunnyshell allows multiple participants to clone environments and experiment with ideas and features independently, eliminating the stress of pull requests and breaking changes.
+-   Accelerated Deployment: Bunnyshell enables businesses to deploy all-in-one application environments systematically and rapidly, enhancing productivity and time-to-market.
+
+-   Reproduction and Testing: Easily reproduce and test your current solution or explore different use cases in seconds,
+-   Cost Management: Bunnyshell helps you optimize costs by efficiently managing your environments and resources,
 
 
 Tutorial: Setting Up Full-Stack Environments with Bunnyshell
@@ -25,11 +26,25 @@ In this tutorial, we will cover two segments: the first segment will demonstrate
 ### Pre-tutorial
 
 Before we start let talk about environments in bunnyshell
-    - When working with with environment variables, you can create either a project, environment, or component variable. 
-    - When you define your environment variables in your yaml file, they will most likely appear in the the component variables or environment variables depending on what section.
-    - You should define your secrets from the UI and click on the secret well because it's a secret and it shouldn't be exposed in the yaml file
+- When working with with environment variables, you can create either a project, environment, or component variable. 
+
 ---
-![secrets](https://)
+Setup Project Variables
+![Env_Prj](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/prj_var1.jpg)
+![Env_Prj](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/prj_var2.jpg)
+
+Setup Environment Variables
+![Env_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/env_var_1.jpg)
+![Env_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/env_var_2.jpg)
+
+Setup Component Variables
+![Comp_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/comp_var_.jpg)
+
+
+- When you define your environment variables in your yaml file, they will most likely appear in the the component variables or environment variables depending on what section.
+- You should define your secrets from the UI and click on the secret well because it's a secret and it shouldn't be exposed in the yaml file
+---
+![secrets](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/secrets.jpg)
 
 > Note: The hierarchy at which bunnyshell will select the variable is component 1st, environment 2nd, project variable. Incase you have different values with the same key.
 
@@ -65,9 +80,9 @@ Here's an example docker-compose file for a development environment:
 
 2.  Define the services and configurations required for your environment in the docker-compose file.
 
-1.  Bunnyshell automatically starts your environments as defined in the docker-compose.yaml file
+3.  Bunnyshell automatically starts your environments as defined in the docker-compose.yaml file
 
-
+![running](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/3.jpg)
 
 ### Segment 2: Using Terraform to Set Up Full-Stack Environment
 
@@ -180,6 +195,9 @@ components:
 - `gitRepo`, `gitBranch`, `gitApplicationPath`, as the names implies defines the GitHub repo url, git remote or github branch and the location to the terraform directory
 - `runnerImage: 'hashicorp/terraform:1.5.1'` which is basically a lightweight alpine image with terraform components installed to help make with terraform commands.
   - Note that when running scripts with terraform null_providers, only sh scripts may work certain bash syntax may not work as common with alpine images. To fix this you may add another bunnyshell component with an image that might work with your purpose
+- In summary `deploy` and `detroy` is basically `terraform apply --auto-approve` and `terraform destroy --auto-approve` respectively
+  - `aws_secret_access_key` and `aws_access_key_id` are defined output in our terraform code files that allow us connect to AWS. 
+  - `{{ env.vars.AWS_ACCESS_KEY_ID }}` and `{{ env.vars.AWS_SECRET_ACCESS_KEY }}` are how we use our defined environment variables(secrets)
 
 
 
@@ -189,6 +207,9 @@ Additional Features and Resources
 Bunnyshell provides additional features and resources that can enhance your experience:
 
 -   Templates: Bunnyshell offers a collection of templates on GitHub (<https://github.com/bunnyshell/templates/>), which can serve as starting points for setting up common environments or configurations.
+-   More detailed understanding on how environment variables work: 
+    -   <https://documentation.bunnyshell.com/docs/variables>
+    -   <https://documentation.bunnyshell.com/docs/variables-interpolation>
 
 Getting Support with Bunnyshell
 -------------------------------

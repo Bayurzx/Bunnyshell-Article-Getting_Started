@@ -1,21 +1,19 @@
-# Getting Started : Simplify your Full-Stack Environment with Bunnyshell
+<!-- # Getting Started : Simplify your Full-Stack Environment with Bunnyshell -->
 
 Introduction to Bunnyshell
 --------------------------
 
 Bunnyshell is an Environment as a Service (EaaS) platform that simplifies the creation and management of full-stack environments for development, staging, and production. It provides developers with fully managed and pre-configured development environments, enabling them to focus on building great products. Let's explore the core features and benefits of Bunnyshell that set it apart from other similar platforms.
 
-Summary:
-> It basically provides containers (environments for your work), where your frontend, DB, and backend can be in the same container or different containers based on your desired use case.
-
 ### Core Features and Functionalities of Bunnyshell EaaS Platform
 
--   EaaS Model: Bunnyshell follows the Environment as a Service model, where developers can access fully managed and pre-configured environments. EaaS expands on the conventional IaaS paradigm for application development.
--   Unified Platform: With Bunnyshell, you can perform all stages of your development in one platform. Say goodbye to complex setups and enjoy the convenience of managing your testing, development, and staging environments in minutes.
--   Collaboration Made Easy: Bunnyshell allows multiple participants to clone environments and experiment with ideas and features independently, eliminating the stress of pull requests and breaking changes.
--   Accelerated Deployment: Bunnyshell enables businesses to deploy all-in-one application environments systematically and rapidly, enhancing productivity and time-to-market.
--   Reproduction and Testing: Easily reproduce and test your current solution or explore different use cases in seconds.
--   Cost Management: Bunnyshell helps you optimize costs by efficiently managing your environments and resources.
+-   **EaaS Model**: Bunnyshell follows the Environment as a Service model, where developers can access fully managed and pre-configured environments. EaaS expands on the conventional IaaS paradigm for application development.
+-   **Unified Platform**: With Bunnyshell, you can perform all stages of your development in one platform. Say goodbye to complex setups and enjoy the convenience of managing your testing, development, and staging environments in minutes.
+-   **Collaboration Made Easy**: Bunnyshell allows multiple participants to clone environments and experiment with ideas and features independently, eliminating the stress of pull requests and breaking changes.
+-   **Accelerated Deployment**: Bunnyshell enables businesses to deploy all-in-one application environments systematically and rapidly, enhancing productivity and time-to-market.
+-   **Reproduction and Testing**: Easily reproduce and test your current solution or explore different use cases in seconds.
+-   **Cost Management**: Bunnyshell helps you optimize costs by efficiently managing your environments and resources.
+-   **User-friendly Interface**: The interface was so easy to use it took me a total of 4 hours to get my app running, 3:45min of it has me updating my code to fix minor bugs and reading the docs
 
 Tutorial: Setting Up Full-Stack Environments with Bunnyshell
 ------------------------------------------------------------
@@ -24,24 +22,24 @@ In this tutorial, we will cover two segments: the first segment will demonstrate
 
 ### Pre-tutorial
 
-Before we start, let's talk about environments in Bunnyshell:
+Before we start, let's talk about variables in Bunnyshell:
 - When working with with environment variables, you can create either a project, environment, or component variable. 
 
 ---
-Setup Project Variables
+> Setup Project Variables
 ![Env_Prj](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/prj_var1.jpg)
 ![Env_Prj](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/prj_var2.jpg)
 
-Setup Environment Variables
+> Setup Environment Variables
 ![Env_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/env_var_1.jpg)
 ![Env_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/env_var_2.jpg)
 
-Setup Component Variables
+> Setup Component Variables
 ![Comp_Var](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/comp_var_.jpg)
 
 
-- When you define your environment variables in your YAML file, they will most likely appear in the component variables or environment variables section, depending on the context.
-- You should define your secrets from the UI and click on the secret well because it's a secret and it shouldn't be exposed in the YAML file.
+- When you define your variables in your YAML file, they will most likely appear in the component variables or environment variables section, depending on the context.
+- You should define your secrets from the UI and click on the secret toggle because it's a secret and it shouldn't be exposed in the YAML file.
 
 
 ---
@@ -91,7 +89,7 @@ To set up a full-stack environment using Terraform, you can utilize Terraform's 
 Here's an example of Terraform configuration created after you have setup your terraform code and bunnyshell environment for provisioning infrastructure resources:
 
 
-```yaml (bunnyshell)
+```yaml
 kind: Environment
 name: Staging
 type: primary
@@ -140,7 +138,7 @@ volumes:
 
 ```
 
-When creating your terraform template, it's important to setup the yaml format in a way that the environment houses the component as shouwn in the yaml template above. 
+When creating your terraform template, it's important to setup the yaml format in a way that the environment houses the component as shown in the yaml template above. 
 - `Kind`, `name`, `type`,  `environmentVariables` are automatically generated
   - `environmentVariables` is only generated only if you had created Environment variables beforehand.
 `urlHandle`: is created after you have created your terraform environment
@@ -191,14 +189,17 @@ components:
             - ACCEPTANCE_TEST_STATUS
 
 ```
-- Above, I created a terraform component by simply defining `kind: Terraform`.
-- `name: staging-onlinesafety-s3-cdn` defines the name of the component
-- `gitRepo`, `gitBranch`, `gitApplicationPath`, as the names implies defines the GitHub repo url, git remote or github branch and the location to the terraform directory
-- `runnerImage: 'hashicorp/terraform:1.5.1'` which is basically a lightweight alpine image with terraform components installed to help make with terraform commands.
-  - Note that when running scripts with terraform null_providers, only sh scripts may work certain bash syntax may not work as common with alpine images. To fix this you may add another bunnyshell component with an image that might work with your purpose
-- In summary `deploy` and `detroy` is basically `terraform apply --auto-approve` and `terraform destroy --auto-approve` respectively
-  - `aws_secret_access_key` and `aws_access_key_id` are defined output in our terraform code files that allow us connect to AWS. 
-  - `{{ env.vars.AWS_ACCESS_KEY_ID }}` and `{{ env.vars.AWS_SECRET_ACCESS_KEY }}` are how we use our defined environment variables(secrets)
+-   Above, I created a terraform component by simply defining `kind: Terraform`.
+-   `name: staging-onlinesafety-s3-cdn` defines the name of the component.
+-   `gitRepo`, `gitBranch`, `gitApplicationPath`, as the names imply, define the GitHub repository URL, git remote or GitHub branch, and the location of the Terraform directory.
+-   `runnerImage: 'hashicorp/terraform:1.5.1'` is a lightweight Alpine based image with Terraform components installed to help with Terraform commands.
+    -   Note that when running scripts with Terraform null_providers, only sh scripts may work. Certain Bash syntax may not work as commonly expected with Alpine images. To fix this, you may add another Bunnyshell component with an image that is suitable for your purpose.
+-   In summary, `deploy` and `destroy` are basically `terraform apply --auto-approve` and `terraform destroy --auto-approve`, respectively.
+    -   `aws_secret_access_key` and `aws_access_key_id` are defined as outputs in our Terraform code files, allowing us to connect to AWS.
+    -   `{{ env.vars.AWS_ACCESS_KEY_ID }}` and `{{ env.vars.AWS_SECRET_ACCESS_KEY }}` are how we use our defined environment variables (secrets).
+-   `exportVariables` are printed out and saved at your component level
+
+![running](https://raw.githubusercontent.com/Bayurzx/Bunnyshell-Article-Getting_Started/article/images/4.jpg)
 
 
 
@@ -218,3 +219,15 @@ Getting Support with Bunnyshell
 If you need any further assistance or support with Bunnyshell, refer to the official documentation (<https://documentation.bunnyshell.com/docs>) for comprehensive guides and resources. The documentation can help you explore advanced features, troubleshoot issues, and find answers to frequently asked questions.
 
 By following this tutorial and leveraging Bunnyshell's powerful features, you can simplify the process of creating and managing full-stack environments, enabling your team to deliver software faster and focus on building great products.
+
+Round-Up
+--------
+
+To get a clearer picture, you can always check out their [templates](https://github.com/bunnyshell/templates). You can also visit my GitHub repository, where the code mentioned above was based: [GitHub](https://github.com/Bayurzx/bunnyshell-hackathon).
+
+Reach Out
+---------
+If you have any questions or simply want to connect, feel free to reach out to me through the following link.
+
+[<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/adebayo-omolumo/) 
+[<img src="https://img.shields.io/badge/@Adebayoomolumo-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />](https://www.linkedin.com/in/adebayo-omolumo/)
